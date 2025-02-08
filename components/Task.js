@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   deleteButton: {
-    marginLeft: 5, 
-    padding: 5, 
+    marginLeft: 5, // Adjust spacing
+    padding: 5, // Adds better clickability
   },
   icon: {
     fontSize: 15,
   },
   star: {
-    fontSize: 20,
+    fontSize: 25,
     color: '#FFF',
     paddingRight: 5,
   },
