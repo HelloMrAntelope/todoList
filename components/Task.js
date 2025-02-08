@@ -4,6 +4,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 const Task = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(props.text || '');
+  const [deletePressed, setDeletePressed] = useState(false);
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -12,6 +13,14 @@ const Task = (props) => {
   const saveEditedTask = () => {
     setIsEditing(false);
     props.onEdit(editedText);
+  };
+
+  const handleDeletePress = () => {
+    setDeletePressed(true); // Change to gray when pressed
+    setTimeout(() => {
+      setDeletePressed(false); // Reset to red after short delay
+      props.onDelete(); // Actually delete the task
+    }, 200); // Adjust delay as needed (200ms)
   };
 
   return (
@@ -46,8 +55,10 @@ const Task = (props) => {
           <Text style={styles.star}>{props.isFavorite ? '★' : '☆'}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={props.onDelete}>
-          <View style={styles.rectangular}></View>
+        <TouchableOpacity onPress={handleDeletePress} style={styles.deleteButton} activeOpacity={0.6}>
+            <Text style={[styles.icon, { color: deletePressed ? '#808080' : '#FF0004' }]}>
+                ❌
+            </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -105,21 +116,21 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     color: '#5E5E5E',
   },
-  rectangular: {
-    width: 15,
-    height: 15,
-    backgroundColor:'#171717',
-    borderColor: '#FF0004',
-    borderWidth: 1.5,
-  },
   actions: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  deleteButton: {
+    marginLeft: 5, 
+    padding: 5, 
+  },
+  icon: {
+    fontSize: 15,
+  },
   star: {
     fontSize: 20,
     color: '#FFF',
-    paddingRight: 10,
+    paddingRight: 5,
   },
   editInput: {
     backgroundColor: '#FFF',
