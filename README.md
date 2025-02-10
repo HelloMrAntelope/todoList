@@ -11,7 +11,9 @@ This demo showcases the following features of the app:
 - Favoriting Tasks
 - Renaming Tasks
 
-Future Plans
+Future Plans/Working on:
 - Changing the color theme for a more personalized look
+- Making it so that when I mark an item as completed, the item goes down to its own completed tasks section.
 - Implementing smooth gliding animations for tasks
 - Uploading the app to the Google Play Store and potentially the App Store for public release
+  
