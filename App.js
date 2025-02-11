@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView, Platform } from 'react-native';
 import Task from './components/Task';
+import ThemeSelector from './components/ThemeSelector';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const HomeScreen = ({ navigation }) => {
   const [task, setTask] = useState('');
-  const [taskItems, setTaskItems] = useState([]);
+  const [activeTasks, setActiveTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   const handleAddTask = () => {
     if (task.trim()) {
       Keyboard.dismiss();
-      setTaskItems([...taskItems, { id: Date.now(), text: task, isFavorite: false, isCompleted: false }]);
+      setActiveTasks([...activeTasks, { id: Date.now(), text: task, isFavorite: false }]);
       setTask('');
     } else {
       alert("Please enter a task!");
@@ -17,58 +23,93 @@ export default function App() {
   };
 
   const completeTask = (taskId) => {
-    setTaskItems((prevItems) => prevItems.filter((item) => item.id !== taskId));
+    const taskToComplete = activeTasks.find((item) => item.id === taskId);
+    if (taskToComplete) {
+      setActiveTasks(activeTasks.filter((item) => item.id !== taskId));
+      setCompletedTasks([...completedTasks, { ...taskToComplete, isCompleted: true }]);
+    }
   };
 
-  const editTask = (taskId, newText) => {
-    setTaskItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === taskId ? { ...item, text: newText } : item
-      )
-    );
+  const unCompleteTask = (taskId) => {
+    const taskToMoveBack = completedTasks.find((item) => item.id === taskId);
+    if (taskToMoveBack) {
+      setCompletedTasks(completedTasks.filter((item) => item.id !== taskId));
+      setActiveTasks([...activeTasks, { ...taskToMoveBack, isCompleted: false }]);
+    }
   };
 
-  const toggleFavorite = (taskId) => {
-    setTaskItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === taskId ? { ...item, isFavorite: !item.isFavorite } : item
-      )
-    );
+  const deleteTask = (taskId, isCompleted) => {
+    if (isCompleted) {
+      setCompletedTasks(completedTasks.filter((item) => item.id !== taskId));
+    } else {
+      setActiveTasks(activeTasks.filter((item) => item.id !== taskId));
+    }
   };
 
-  const toggleComplete = (taskId) => {
-    setTaskItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === taskId ? { ...item, isCompleted: !item.isCompleted } : item
-      )
-    );
+  const editTask = (taskId, newText, isCompleted) => {
+    if (isCompleted) {
+      setCompletedTasks(completedTasks.map((item) => (item.id === taskId ? { ...item, text: newText } : item)));
+    } else {
+      setActiveTasks(activeTasks.map((item) => (item.id === taskId ? { ...item, text: newText } : item)));
+    }
+  };
+
+  const toggleFavorite = (taskId, isCompleted) => {
+    if (isCompleted) {
+      setCompletedTasks(completedTasks.map((item) => (item.id === taskId ? { ...item, isFavorite: !item.isFavorite } : item)));
+    } else {
+      setActiveTasks(activeTasks.map((item) => (item.id === taskId ? { ...item, isFavorite: !item.isFavorite } : item)));
+    }
   };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}>Today's tasks</Text>
+          <Text style={styles.sectionTitle}>Today's tasks:</Text>
           <View style={styles.items}>
-            {taskItems
-              .sort((a, b) => (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0)) // Sort tasks by favorites
+            {activeTasks
+              .sort((a, b) => (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0)) // Sort active tasks by favorite
               .map((item) => (
                 <Task
                   key={item.id}
                   text={item.text}
-                  isCompleted={item.isCompleted}
+                  isCompleted={false}
                   isFavorite={item.isFavorite}
-                  onComplete={() => toggleComplete(item.id)}
-                  onDelete={() => completeTask(item.id)}
-                  onEdit={(newText) => editTask(item.id, newText)}
-                  onFavorite={() => toggleFavorite(item.id)}
+                  onComplete={() => completeTask(item.id)}
+                  onDelete={() => deleteTask(item.id, false)}
+                  onEdit={(newText) => editTask(item.id, newText, false)}
+                  onFavorite={() => toggleFavorite(item.id, false)}
                 />
               ))}
           </View>
+          
+          {completedTasks.length > 0 && (
+            <>
+              <Text style={styles.sectionTitle}>Completed tasks:</Text>
+              <View style={styles.items}>
+                {completedTasks.map((item) => (
+                  <Task
+                    key={item.id}
+                    text={item.text}
+                    isCompleted={true}
+                    isFavorite={item.isFavorite}
+                    onComplete={() => unCompleteTask(item.id)}
+                    onDelete={() => deleteTask(item.id, true)}
+                    onEdit={(newText) => editTask(item.id, newText, true)}
+                    onFavorite={() => toggleFavorite(item.id, true)}
+                  />
+                ))}
+              </View>
+            </>
+          )}
         </View>
       </ScrollView>
 
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.writeTaskWrapper}>
+      <KeyboardAvoidingView 
+       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 100}
+       style={styles.writeTaskWrapper}>
         <TextInput
           style={styles.input}
           placeholder="Write a task"
@@ -82,7 +123,34 @@ export default function App() {
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
+
     </View>
+  );
+};
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={({ navigation, route }) => ({
+          headerStyle: { backgroundColor: '#06B6F5' },
+          headerTintColor: '#FFF',
+          headerTitleStyle: { fontSize: 20 },
+          headerRight: () => 
+            route.name === 'Home' ? (
+              <TouchableOpacity
+              onPress={() => navigation.navigate('Themes')}
+              style={styles.themeButton}
+            >
+              <Text style={styles.themeButtonText}>Themes</Text>
+            </TouchableOpacity>
+          ) : null,    
+        })}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Themes" component={ThemeSelector} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -92,16 +160,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#171717',
   },
   tasksWrapper: {
-    paddingTop: 80,
+    paddingTop: 5,
     paddingHorizontal: 20,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#06B6F5',
+    marginTop: 20,
   },
   items: {
-    marginTop: 30,
+    marginTop: 10,
   },
   writeTaskWrapper: {
     position: 'absolute',
@@ -135,5 +204,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 32,
     color: '#FFF',
+  },
+  
+  themeButtonText: {
+    marginRight: 15,
+    padding: 5,
+    color: '#FFF',
+    fontSize: 20,
   },
 });
