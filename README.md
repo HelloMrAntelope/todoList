@@ -18,4 +18,12 @@ Future Plans/Working on:
 - Making it so that when I mark an item as completed, the item goes down to its own completed tasks section.
 - Implementing smooth gliding animations for tasks
 - Uploading the app to the Google Play Store and potentially the App Store for public release
-  
+-------------------------------------------------------------------------------------------------------------------------
+Update - 2/11/2025:
+
+https://github.com/user-attachments/assets/a991883c-0f9e-411a-bdd8-26dd71d16965
+
+Showcasing New Features:
+- Completed Tasks Section
+- New Theme Page using Navigation
+
