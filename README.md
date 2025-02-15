@@ -27,3 +27,13 @@ Showcasing New Features:
 - Completed Tasks Section
 - New Theme Page using Navigation
 
+--------------------------------------------------------------------------------------------------------------------------
+Update/Current State - 2/15/2025
+
+
+https://github.com/user-attachments/assets/33e096b0-17ac-4246-a530-2cf97623396c
+
+^Showcasing Current State of Themes Page on an Android Device (Samsung Galaxy S25)^
+
+-Currently Working on making the theme page look nicer and also making it so choosing a theme will alter the homepage.
+
