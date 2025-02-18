@@ -37,9 +37,11 @@ https://github.com/user-attachments/assets/33e096b0-17ac-4246-a530-2cf97623396c
 
 -Currently Working on making the theme page look nicer and also making it so choosing a theme will alter the homepage.
 
-------------------------------------------Update/Current State - 2/18/2025
+---------------------------------------------------------------------------------------------------------------------------
+Update/Current State - 2/18/2025
 
-https://photos.app.goo.gl/1Wvf8Wbdb7roEddh6
+https://github.com/user-attachments/assets/ce32a948-60bb-441a-b55f-1556e95ea93d
+
 
 - Showcasing all Current features.
 - Updated Settings drop down tab
