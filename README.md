@@ -45,3 +45,14 @@ https://github.com/user-attachments/assets/ce32a948-60bb-441a-b55f-1556e95ea93d
 
 - Showcasing all Current features.
 - Updated Settings drop down tab
+
+----------------------------------------------------------------------------------------------------------------------------
+Update/Current State - 2/20/2025
+
+https://github.com/user-attachments/assets/ea374382-0c4d-4497-b060-ca2399b81579
+
+- Showcasing new Premium Tab (Will focus on that portion near the end of development)
+- Created a Note Pad page and it saves locally using Async Storage.
+
+- Future Update will be making the theme we choose actually save and effect the rest of the application.
+  
