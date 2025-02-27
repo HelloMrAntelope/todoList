@@ -65,4 +65,8 @@ https://github.com/user-attachments/assets/2e233f29-2c8c-436d-84fb-6a4b96cd2dc3
 - Themes also alters notepad
 - Future updates includes making the navigation header area change color, and making the overall app look nicer.
 
-  
+Current File Strucutre to show that I am actually working on this code even though the repository itself isnt being updated:
+
+![Screenshot 2025-02-27 151650](https://github.com/user-attachments/assets/18b34e16-723d-48b1-bcb3-2a966cf41985)
+
+
