@@ -55,4 +55,14 @@ https://github.com/user-attachments/assets/ea374382-0c4d-4497-b060-ca2399b81579
 - Created a Note Pad page and it saves locally using Async Storage.
 
 - Future Update will be making the theme we choose actually save and effect the rest of the application.
+--------------------------------------------------------------------------------------------------------------------------
+Current Status as of 2/26/2025
+
+
+https://github.com/user-attachments/assets/2e233f29-2c8c-436d-84fb-6a4b96cd2dc3
+
+- Showcasing status of the themes feature.
+- Themes also alters notepad
+- Future updates includes making the navigation header area change color, and making the overall app look nicer.
+
   
