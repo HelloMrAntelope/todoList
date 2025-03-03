@@ -68,5 +68,14 @@ https://github.com/user-attachments/assets/2e233f29-2c8c-436d-84fb-6a4b96cd2dc3
 Current File Strucutre to show that I am actually working on this code even though the repository itself isnt being updated:
 
 ![Screenshot 2025-02-27 151650](https://github.com/user-attachments/assets/18b34e16-723d-48b1-bcb3-2a966cf41985)
+--------------------------------------------------------------------------------------------------------------------------
+Current Imporovements made and am still working on as of 3/3/2025 3:30PM EST. Will post a video update sooner or later
 
-
+- [x] Remove Banana Theme because it is overbearing and doesnt look nice especially when favoriting a task. 
+- [x] Make it so that the white letters in the light themes get switched to black and vise versa.
+  - [ ] Apply this same concept for the text within the Premium page.
+- [x] Make app design look nicer.
+- [x] Make top header/navigation area change color for the other pages based on chosen theme. -- This task was the most challenging compared to the other listed tasks because the hompage nav bar is custom made.
+- [ ] Make dropdown menu dissapear after navigating to a page without having to click the gear icon at the top of the homepage.
+- [ ] Make it so that the "X" delete icon looks nicer within the Bold Red theme.
+-- Will update soon. Thanks.
